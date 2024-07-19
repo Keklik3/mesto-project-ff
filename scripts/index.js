@@ -18,7 +18,7 @@ function createCard(data, onDelete) {
   const cardImage = userElement.querySelector(".card__image");
   cardTitle.textContent = data.name;
   cardImage.src = data.link;
-  cardAlt.alt = data.name;
+  cardImage.alt = data.name; 
 
   const deleteButton = userElement.querySelector(".card__delete-button");
   deleteButton.addEventListener("click", function () {
