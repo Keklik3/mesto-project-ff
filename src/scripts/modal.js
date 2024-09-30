@@ -14,9 +14,9 @@ export function closeModal(popupElement) {
 
 function handleEscClose(evt) {
   if (evt.key === "Escape") {
-    const openPopup = document.querySelector(".popup_is-opened");
-    if (openPopup) {
-      closeModal(openPopup);
+    const openedPopup = document.querySelector(".popup_is-opened");
+    if (openedPopup) {
+      closeModal(openedPopup);
     }
   }
 }
@@ -26,13 +26,3 @@ function handleOverlayClose(evt) {
     closeModal(evt.currentTarget);
   }
 }
-
-const closeButtons = document.querySelectorAll(".popup__close");
-closeButtons.forEach((button) => {
-  button.addEventListener("click", (evt) => {
-    const popupElement = evt.target.closest(".popup");
-    if (popupElement) {
-      closeModal(popupElement);
-    }
-  });
-});
