@@ -1,6 +1,7 @@
+const cardTemplate = document.querySelector("#card-template").content;
+
 export function createCard(data, deleteCard, onLike, onImageClick, userId) {
-  const userTemplate = document.querySelector("#card-template").content;
-  const userElement = userTemplate
+  const userElement = cardTemplate
     .querySelector(".places__item")
     .cloneNode(true);
   const cardTitle = userElement.querySelector(".card__title");

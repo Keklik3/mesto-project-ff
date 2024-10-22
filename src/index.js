@@ -57,6 +57,9 @@ const validationSettings = {
 Promise.all([fetchProfile(), fetchCards()]).then(([resProfile, resCards]) => {
   profileRender(resProfile);
   renderInitialCards(resCards);
+})
+.catch((error) => {
+  console.error("Ошибка при загрузке данных:", error);
 });
 
 function profileRender(profileInfo) {
@@ -64,7 +67,7 @@ function profileRender(profileInfo) {
   profileSettings.title = profileInfo.name;
   profileSettings.about = profileInfo.about;
   profileSettings.avatar = profileInfo.avatar;
-  nameInput.textContent = profileSettings.title;
+  nameElement.textContent = profileSettings.title;
   jobElement.textContent = profileSettings.about;
   profileImage.setAttribute(
     "style",
@@ -81,7 +84,7 @@ export function renderInitialCards(cardData) {
       onImageClick,
       profileSettings.id
     );
-    placesListElement.prepend(newCard);
+    placesListElement.append(newCard);
   });
 }
 
@@ -132,7 +135,7 @@ cardForm.addEventListener("submit", (evt) => {
       placesListElement.prepend(newCard);
       closeModal(popupNewCardElement);
       cardForm.reset();
-      clearValidation(document.forms.avatar, validationConfig);
+      clearValidation(cardForm, validationConfig);
     })
     .catch((err) => console.log(err))
     .finally(() => (button.textContent = "Сохранить"));
@@ -181,14 +184,9 @@ function changeAvatar(evt) {
 }
 
 profileEditButton.addEventListener("click", () => {
-  const nameInput = popupEditProfileElement.querySelector(
-    ".popup__input_type_name"
-  );
-  const jobElement = popupEditProfileElement.querySelector(
-    ".popup__input_type_description"
-  );
   nameInput.value = nameElement.textContent;
-  jobElement.value = jobElement.textContent;
+  jobInput.value = jobElement.textContent;
+  clearValidation(formEditProfile, validationSettings);
   openModal(popupEditProfileElement);
 });
 

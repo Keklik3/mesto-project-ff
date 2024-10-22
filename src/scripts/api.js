@@ -1,3 +1,8 @@
+const headers = {
+  authorization: "f8686eac-6955-4da2-a5e8-dda653563f6c",
+  "Content-Type": "application/json",
+};
+
 function handleResponse(res, err) {
   if (res.ok) {
     return res.json();
@@ -8,30 +13,21 @@ function handleResponse(res, err) {
 const fetchProfile = () => {
   return fetch("https://nomoreparties.co/v1/wff-cohort-24/users/me", {
     method: "GET",
-    headers: {
-      authorization: "f8686eac-6955-4da2-a5e8-dda653563f6c",
-      "Content-Type": "application/json",
-    },
+    headers: headers,
   }).then((res) => handleResponse(res, `Ошибка: ${res.status}`));
 };
 
 const fetchCards = () => {
   return fetch("https://nomoreparties.co/v1/wff-cohort-24/cards", {
     method: "GET",
-    headers: {
-      authorization: "f8686eac-6955-4da2-a5e8-dda653563f6c",
-      "Content-Type": "application/json",
-    },
+    headers: headers,
   }).then((res) => handleResponse(res, `Ошибка: ${res.status}`));
 };
 
 const updateProfile = (name, about) => {
   return fetch("https://nomoreparties.co/v1/wff-cohort-24/users/me", {
     method: "PATCH",
-    headers: {
-      authorization: "f8686eac-6955-4da2-a5e8-dda653563f6c",
-      "Content-Type": "application/json",
-    },
+    headers: headers,
     body: JSON.stringify({
       name: name,
       about: about,
@@ -42,10 +38,7 @@ const updateProfile = (name, about) => {
 const postCard = (cardData) => {
   return fetch("https://nomoreparties.co/v1/wff-cohort-24/cards", {
     method: "POST",
-    headers: {
-      authorization: "f8686eac-6955-4da2-a5e8-dda653563f6c",
-      "Content-Type": "application/json",
-    },
+    headers: headers,
     body: JSON.stringify(cardData),
   }).then((res) => handleResponse(res, `Ошибка: ${res.status}`));
 };
@@ -53,10 +46,7 @@ const postCard = (cardData) => {
 const deleteCardRequest = (cardId) => {
   return fetch(`https://nomoreparties.co/v1/wff-cohort-24/cards/${cardId}`, {
     method: "DELETE",
-    headers: {
-      authorization: "f8686eac-6955-4da2-a5e8-dda653563f6c",
-      "Content-Type": "application/json",
-    },
+    headers: headers,
   }).then((res) => handleResponse(res, `Ошибка: ${res.status}`));
 };
 
@@ -89,10 +79,7 @@ const unlikeCard = (cardId) => {
 const avatarRequest = (link) => {
   return fetch(`https://nomoreparties.co/v1/wff-cohort-24/users/me/avatar`, {
     method: "PATCH",
-    headers: {
-      authorization: "f8686eac-6955-4da2-a5e8-dda653563f6c",
-      "Content-Type": "application/json",
-    },
+    headers: headers,
     body: JSON.stringify({
       avatar: link,
     }),
